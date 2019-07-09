@@ -37,6 +37,7 @@ class AddForm extends Component {
     this.state = {
       options: [],
       selectOptions: [],
+      status: 1,
       skills: [],
       error: 0
     };
@@ -78,10 +79,13 @@ class AddForm extends Component {
         rediect = true;
         alert("Add successful!")
       } else {
-        if(result.statusCode == 500)
-        alert("Email or Skype was used by another account.");
-        else
-        alert("Something wrong!")
+        if(result.statusCode == 500){
+          this.setState({msg: "Email or Skype was used by another account." })
+        }
+        // }
+        // alert("Email or Skype was used by another account.");
+        // else 
+        // alert("Something wrong!")
       }
       if(rediect){
         window.location = "/engineer";
@@ -118,13 +122,14 @@ class AddForm extends Component {
         </div>
         <div className="portlet-body">
           <div className="tab-content">
+            <span style = {{color: "red"}}> {this.state.msg}</span>
             <div className="tab-pane active" id="tab_1_1">
               <Form onSubmit={e => this.onSubmit(e)} ref={c => { this.form = c }}>
                 {/* <div className="form-group" style={{ textAlign: 'center' }}>
                   <img height="130px" src="../assets/layouts/layout6/img/none-avatar.png" /><br /><br />
 
                 </div> */}
-
+               
                 <div className="col-md-6">
                   <div className="form-group">
                     <label className="control-label">English Name</label>
@@ -165,7 +170,7 @@ class AddForm extends Component {
                   </div>
                   <div className="form-group">
                     <label className="control-label">Status</label>
-                    <select className="form-control" onChange={(event) => this.isChange(event)} name="status"   >
+                    <select className="form-control" onChange={(event) => this.isChange(event)} name="status" >                     
                       <option value={1} >Available</option>
                       <option value={0} >Unavailable</option>
                     </select>
