@@ -39,7 +39,7 @@ export default class LoginFunc extends Component {
 
     checkBug(){
         if(!this.state.error)
-        return(<small style={{ backgroundColor: 'yellow' }} className="form-title font-red" > Username or password is wrong !</small>)
+        return(<big style={{ fontWeight: 'bold',backgroundColor: '#FFCEE7',fontSize: "17px"}} className="form-title font-red" > Username or password is incorrect!</big>)
     }
 
     login() {
