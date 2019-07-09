@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 import RowData from './RowData';
 import getData from '../../../services/GetViewEng';
+import Pagination from "react-js-pagination";
 
 class TableData extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: ""
+      data: "",
+      itemsCountPerPage: 1,
+      totalItemsCount: 10,
+      pageRangeDisplayed: 3,
+      activePage : 1
     }
+  }
+  handlePageChange =(pageNumber)=> {
+    console.log('active page is: ' + pageNumber);
+    this.setState({activePage: pageNumber})
+    // this.setState({activePage: pageNumber});
   }
   async componentWillMount(){
     const res = await getData();
-    console.log(res);
-
     let dataRender = res.results.map((value,key) =>(
       <RowData  
       key = {key}
@@ -56,6 +64,14 @@ class TableData extends Component {
                 {this.state.data}
               </tbody>
             </table>
+            <Pagination
+          activePage={this.state.activePage}
+          itemsCountPerPage={this.state.itemsCountPerPage}
+          totalItemsCount={this.state.totalItemsCount}
+          pageRangeDisplayed={this.state.pageRangeDisplayed}
+          onChange={this.handlePageChange}
+          itemClass = 'page-item'
+        />
           </div>
         );
     }

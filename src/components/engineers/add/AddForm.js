@@ -11,7 +11,6 @@ const required = (value) => {
     return <small className="form-text text-danger">This field is required</small>;
   }
 }
-
 const phone = (value) => {
   if (!isNumeric(value, [{ no_symbols: false }])) {
     return <small className="form-text text-danger">The phone number contains only numbers.</small>;
@@ -30,7 +29,6 @@ const email = (value) => {
     return <small className="form-text text-danger">Invalid email format</small>;
   }
 }
-
 class AddForm extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +41,6 @@ class AddForm extends Component {
     };
     // this.handleChange = this.handleChange.bind(this);
   }
-
   isChange = (event) => {
     const fieldName = event.target.name;
     const value = event.target.value;
@@ -79,20 +76,19 @@ class AddForm extends Component {
         rediect = true;
         alert("Add successful!")
       } else {
-        if(result.statusCode == 500){
-          this.setState({msg: "Email or Skype was used by another account." })
+        if (result.statusCode == 500) {
+          this.setState({ msg: "Email or Skype was used by another account." })
         }
         // }
         // alert("Email or Skype was used by another account.");
         // else 
         // alert("Something wrong!")
       }
-      if(rediect){
+      if (rediect) {
         window.location = "/engineer";
       }
     })
   }
-
   handleChange = (selectOptions) => {
     this.setState({ selectOptions });
     let temp = []
@@ -122,14 +118,12 @@ class AddForm extends Component {
         </div>
         <div className="portlet-body">
           <div className="tab-content">
-            <span style = {{color: "red"}}> {this.state.msg}</span>
+            <span style={{ color: "red" }}> {this.state.msg}</span>
             <div className="tab-pane active" id="tab_1_1">
               <Form onSubmit={e => this.onSubmit(e)} ref={c => { this.form = c }}>
-                {/* <div className="form-group" style={{ textAlign: 'center' }}>
+                <div className="form-group" style={{ textAlign: 'center' }}>
                   <img height="130px" src="../assets/layouts/layout6/img/none-avatar.png" /><br /><br />
-
-                </div> */}
-               
+                </div>
                 <div className="col-md-6">
                   <div className="form-group">
                     <label className="control-label">English Name</label>
@@ -150,11 +144,10 @@ class AddForm extends Component {
                     <label className="control-label">Phone Number</label>
                     <Input type="text" name="phoneNumber" onChange={(event) => this.isChange(event)} validations={[required, phone]} className="form-control" /> </div>
                 </div>
-
                 <div className="col-md-6" style={{ height: "444px" }}>
                   <div className="form-group">
                     <label className="control-label">Email</label>
-                    <Input type="text" name="email" onChange={(event) => this.isChange(event)} validations={[required,email]} className="form-control" /> </div>
+                    <Input type="text" name="email" onChange={(event) => this.isChange(event)} validations={[required, email]} className="form-control" /> </div>
                   <div className="form-group">
                     <label className="control-label">Skype</label>
                     <Input type="text" name="skype" onChange={(event) => this.isChange(event)} validations={[required]} className="form-control" /> </div>
@@ -166,11 +159,10 @@ class AddForm extends Component {
                     <div className="col-md-12">
                       <Select value={this.state.selectOptions} options={this.state.options} isMulti onChange={this.handleChange} />
                     </div>
-
                   </div>
                   <div className="form-group">
                     <label className="control-label">Status</label>
-                    <select className="form-control" onChange={(event) => this.isChange(event)} name="status" >                     
+                    <select className="form-control" onChange={(event) => this.isChange(event)} name="status" >
                       <option value={1} >Available</option>
                       <option value={0} >Unavailable</option>
                     </select>
@@ -181,12 +173,10 @@ class AddForm extends Component {
                 </div>
               </Form>
             </div>
-
           </div>
         </div>
       </div>
     );
   }
 }
-
 export default AddForm;
